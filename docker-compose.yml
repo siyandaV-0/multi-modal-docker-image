@@ -6,8 +6,8 @@ services:
     environment:
       - CHOWN_HOME=yes
     volumes:
-      - './Code:/app'                # Attach our Code folder
-      - './notebooks:/home/container_user/notebooks'  # Add a volume for notebooks directory
+      # - './Code:/app'                # Attach our Code folder
+      - './Code:/home/container_user/notebooks'  # Add a volume for notebooks directory
     user: "container_user"    
     deploy:
       resources:
