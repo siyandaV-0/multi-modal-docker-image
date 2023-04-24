@@ -32,5 +32,5 @@ RUN useradd -ms /bin/bash $USERNAME
 EXPOSE 8888 
 
 # We shall port map the 8888 to port 8989 on a server called bluecrane:
-CMD ["bash", "-c", "source /etc/bash.bashrc && jupyter lab --notebook-dir=./app --ip 0.0.0.0 --no-browser  --NotebookApp.custom_display_url='http://bluecrane:8989'"]
+CMD ["bash", "-c", "source /etc/bash.bashrc && jupyter lab --notebook-dir=/app --ip 0.0.0.0 --no-browser  --NotebookApp.custom_display_url='http://bluecrane:8989'"]
 
