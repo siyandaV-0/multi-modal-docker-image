@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  multi-modal-env:
+    image: multi-modal-env:latest
+    build: .
+    volumes:
+      - './Code:/app'                # Attach our model's folder
+    user: "container_user"   
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    ports:
+      - 8989:8888   # Our jupyter-lab will be accessible on port 8989
+    tty: true
+    stdin_open: true
