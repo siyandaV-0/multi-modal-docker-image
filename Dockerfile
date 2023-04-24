@@ -1,6 +1,16 @@
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 # FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10 # For Load-Balancing
 
+# Add new container user
+# This method consists of better container security versus running as root
+ENV USERNAME container_user
+RUN useradd -ms /bin/bash $USERNAME 
+
+# Set the ownership and permissions of the working directory
+RUN chown -R $USERNAME:$USERNAME /app
+RUN chmod -R 777 /app
+
+# Set Working Directory
 WORKDIR /app
 
 # Set non-interactive mode 
@@ -22,11 +32,6 @@ RUN pip3 install -r mm-requirements.txt
 
 #Install Opencv from source so it has cuda support:
 RUN bash opencv.sh
-
-# Add new container user
-# This method consists of better container security versus running as root
-ENV USERNAME container_user
-RUN useradd -ms /bin/bash $USERNAME 
 
 # Jupyter-lab localhost runs on port 8888
 EXPOSE 8888 
