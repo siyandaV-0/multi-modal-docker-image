@@ -5,7 +5,7 @@ Multi-Modal Models Docker Image:
 ---
 <h4 style="Text-Align:left;color:black; background-color:Gold;">
     <ul>
-    <li>This image builds a computer-vision environment in jupyter-lab <br>
+    <li>This image builds a multi-modal environment for use in jupyter-lab <br>
     <li>The image builds opencv from source code to have cuda support. <br>
     <li>You can then run the cv algorithms using the GPU for faster processing.<br>
     <li>This will serve you well if you can deploy the container to a remote server.<br>
@@ -28,7 +28,7 @@ Our working Directory is structured as follows:
     │   ├── mm-requirements.txt
     │   ├── ubuntu-deps.sh
     │   └── opencv.sh
-    ├── apps
+    ├── Code
     │   └── stable-diffusion.ipynb    
     ├── Dockerfile
     ├── docker-compose.yml
@@ -59,11 +59,7 @@ To launch the image run the docker-run bash script
 ```shell
  docker-compose up
 ```
-
 <h4 style="Text-Align:left;color:black; background-color:Gold;">
 The docker run bash scripts allow for ease of launching into the container's jupyter-lab. <br> 
 This docker run script uses docker-compose commands to achieve this.<br> 
-The docker-compose.yml file contains a set of commands that specify using the host's GUI via Xorg, <br>
-which we require to have a display interface inside the container. 
-
 </h4>
