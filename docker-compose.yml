@@ -3,6 +3,8 @@ services:
   multi-modal-env:
     image: multi-modal-env:latest
     build: .
+    environment:
+      - CHOWN_HOME=yes
     volumes:
       - './Code:/app'                # Attach our Code folder
     user: "container_user"    
