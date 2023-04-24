@@ -15,5 +15,4 @@ services:
               capabilities: [gpu]
     ports:
       - 8989:8888   # Our jupyter-lab will be accessible on port 8989
-    tty: true
-    stdin_open: true
+    
