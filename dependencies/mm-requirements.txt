@@ -4,6 +4,7 @@ hdf5storage
 h5py
 py3nvml
 pyinstrument
+jupyter
 jupyterlab
 matplotlib
 scikit-image
