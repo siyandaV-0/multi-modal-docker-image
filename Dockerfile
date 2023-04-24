@@ -18,7 +18,7 @@ ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 #Install requirements for our multi-modal work env
-RUN pip3 install -r cv-requirements.txt
+RUN pip3 install -r mm-requirements.txt
 
 #Install Opencv from source so it has cuda support:
 RUN bash opencv.sh
