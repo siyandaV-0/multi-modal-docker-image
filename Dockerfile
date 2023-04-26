@@ -16,7 +16,8 @@ WORKDIR /app
 # Set non-interactive mode 
 ENV DEBIAN_FRONTEND=noninteractive 
 
-COPY ./dependencies ./
+# Copy ubuntu bash script file into working folder
+COPY ./dependencies/ubuntu-deps.sh ./
 
 # Install required Ubuntu dependencies for OpenCV with CUDA
 RUN bash ubuntu-deps.sh
@@ -27,8 +28,16 @@ ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 # See http://bugs.python.org/issue19846
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
+
+# Copy requirements file into working folder
+COPY ./dependencies/mm-requirements.txt ./
+
 #Install requirements for our multi-modal work env
 RUN pip3 install -r mm-requirements.txt
+
+
+# Copy opencv bash script file into working folder
+COPY ./dependencies/opencv.sh ./
 
 #Install Opencv from source so it has cuda support:
 RUN bash opencv.sh

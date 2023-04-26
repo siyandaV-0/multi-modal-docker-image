@@ -4,10 +4,11 @@ services:
     image: multi-modal-env:latest
     build: .
     environment:
+      - USERNAME="container_user"
       - CHOWN_HOME=yes
     volumes:
-      - './Code:/app'                # Attach our Code folder
-    user: "container_user"    
+      - '${PWD}/Code:/app'                # Attach our Code folder
+    user: ${USERNAME} 
     deploy:
       resources:
         reservations:
@@ -16,6 +17,6 @@ services:
               count: 1
               capabilities: [gpu]
     ports:
-      - 8989:8888   # Our jupyter-lab will be accessible on port 8989
+      - 8989:8888   # Our jupyter-lab/notebook will be accessible on port 8989
     tty: true
     stdin_open: true
