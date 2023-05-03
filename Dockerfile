@@ -1,29 +1,6 @@
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 # FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10 # For Load-Balancing
 
-# Add new container user
-# This method consists of better container security versus running as root
-# ENV USERNAME container_user
-# RUN useradd -ms /bin/bash $USERNAME && mkdir /app
-
-# # Set the ownership and permissions of the working directory
-# RUN chown -R $USERNAME:$USERNAME /app
-# RUN chmod -R 777 /app
-
-ARG USERNAME=container_user
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-
-# Create the user
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -ms /bin/bash $USERNAME 
-
-USER ${USERNAME}
-
-# Set Working Directory
-WORKDIR /app
-
-# Set non-interactive mode 
 ENV DEBIAN_FRONTEND=noninteractive 
 
 # Copy ubuntu bash script file into working folder
@@ -50,9 +27,21 @@ COPY ./dependencies/opencv.sh ./
 #Install Opencv from source so it has cuda support:
 RUN bash opencv.sh
 
+# Set Working Directory
+WORKDIR /app
+
 # Jupyter-lab localhost runs on port 8888
 EXPOSE 8888 
 
+# ARG USERNAME=container_user
+# ARG USER_UID=1006
+# ARG USER_GID=$USER_UID
+
+# # Create the user
+# RUN groupadd --gid $USER_GID $USERNAME \
+#     && useradd --uid $USER_UID --gid $USER_GID -ms /bin/bash $USERNAME 
+
+# USER $USERNAME
+
 # We shall port map the 8888 to port 8989 on a server called bluecrane:
 CMD ["bash", "-c", "jupyter-lab --ip 0.0.0.0 --no-browser --notebook-dir=/app --allow-root --NotebookApp.custom_display_url='http://bluecrane:8989'"]
-
