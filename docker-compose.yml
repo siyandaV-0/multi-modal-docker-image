@@ -7,6 +7,7 @@ services:
       - CHOWN_HOME=yes
     volumes:
       - '${PWD}/Code:/app'                # Attach our Code folder
+    user: root
     deploy:
       resources:
         reservations:
