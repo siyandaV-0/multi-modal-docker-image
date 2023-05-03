@@ -3,17 +3,25 @@ FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
 # Add new container user
 # This method consists of better container security versus running as root
-ENV USERNAME container_user
-RUN useradd -ms /bin/bash $USERNAME && mkdir /app
+# ENV USERNAME container_user
+# RUN useradd -ms /bin/bash $USERNAME && mkdir /app
 
-# Set the ownership and permissions of the working directory
-RUN chown -R $USERNAME:$USERNAME /app
-RUN chmod -R 777 /app
+# # Set the ownership and permissions of the working directory
+# RUN chown -R $USERNAME:$USERNAME /app
+# RUN chmod -R 777 /app
+
+ARG USERNAME=container_user
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+# Create the user
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -ms /bin/bash $USERNAME 
+
+USER ${USERNAME}
 
 # Set Working Directory
 WORKDIR /app
-
-USER ${USERNAME}
 
 # Set non-interactive mode 
 ENV DEBIAN_FRONTEND=noninteractive 
