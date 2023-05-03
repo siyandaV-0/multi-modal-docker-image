@@ -34,10 +34,10 @@ WORKDIR /app
 EXPOSE 8888 
 
 # For better container security use create user
-# On the server we are working on UID is 1006:
+# On the server the UID/GID is 1006/1008:
 ARG USERNAME=container_user
-ARG USER_UID=1000             
-ARG USER_GID=$USER_UID
+ARG USER_UID=1006             
+ARG USER_GID=1008
 
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -ms /bin/bash $USERNAME 
