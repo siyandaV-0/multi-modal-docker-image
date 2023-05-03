@@ -10,10 +10,10 @@ RUN useradd -ms /bin/bash $USERNAME && mkdir /app
 RUN chown -R $USERNAME:$USERNAME /app
 RUN chmod -R 777 /app
 
-USER ${USERNAME}
-
 # Set Working Directory
 WORKDIR /app
+
+USER ${USERNAME}
 
 # Set non-interactive mode 
 ENV DEBIAN_FRONTEND=noninteractive 
