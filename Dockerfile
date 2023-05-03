@@ -33,15 +33,16 @@ WORKDIR /app
 # Jupyter-lab localhost runs on port 8888
 EXPOSE 8888 
 
-# ARG USERNAME=container_user
-# ARG USER_UID=1006
-# ARG USER_GID=$USER_UID
+# For better container security use create user
+# On the server we are working on UID is 1006:
+ARG USERNAME=container_user
+ARG USER_UID=1000             
+ARG USER_GID=$USER_UID
 
-# # Create the user
-# RUN groupadd --gid $USER_GID $USERNAME \
-#     && useradd --uid $USER_UID --gid $USER_GID -ms /bin/bash $USERNAME 
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -ms /bin/bash $USERNAME 
 
-# USER $USERNAME
+USER $USERNAME
 
 # We shall port map the 8888 to port 8989 on a server called bluecrane:
-CMD ["bash", "-c", "jupyter-lab --ip 0.0.0.0 --no-browser --notebook-dir=/app --allow-root --NotebookApp.custom_display_url='http://bluecrane:8989'"]
+CMD ["bash", "-c", "source /etc/bash.bashrc && jupyter-lab --ip 0.0.0.0 --no-browser --notebook-dir=/app --allow-root --NotebookApp.custom_display_url='http://bluecrane:8989'"]
