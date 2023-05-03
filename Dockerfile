@@ -13,6 +13,8 @@ RUN chmod -R 777 /app
 # Set Working Directory
 WORKDIR /app
 
+USER container_user
+
 # Set non-interactive mode 
 ENV DEBIAN_FRONTEND=noninteractive 
 

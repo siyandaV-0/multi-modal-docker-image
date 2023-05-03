@@ -4,11 +4,9 @@ services:
     image: multi-modal-env:latest
     build: .
     environment:
-      - USERNAME="container_user"
       - CHOWN_HOME=yes
     volumes:
       - '${PWD}/Code:/app'                # Attach our Code folder
-    user: ${USERNAME} 
     deploy:
       resources:
         reservations:
