@@ -4,7 +4,7 @@ services:
     image: multi-modal-env:latest
     build: .
     volumes:
-      - '${PWD}/Code:/app'                # Attach our Code folder
+      - '${PWD}/test-code:/app'                # Attach our Code folder
     deploy:
       resources:
         reservations:
