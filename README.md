@@ -28,7 +28,8 @@ Our working Directory is structured as follows:
     │   ├── mm-requirements.txt
     │   ├── ubuntu-deps.sh
     │   └── opencv.sh
-    ├── Code
+    ├── test-code
+    │   ├── controlnet.ipynb
     │   └── stable-diffusion.ipynb    
     ├── Dockerfile
     ├── docker-compose.yml
