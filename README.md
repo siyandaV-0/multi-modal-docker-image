@@ -6,6 +6,7 @@ Multi-Modal Models Docker Image:
 <h4 style="Text-Align:left;color:black; background-color:Gold;">
     <ul>
     <li>This image builds a multi-modal environment for use in jupyter-lab <br>
+    <li> The multimodality in question is mostly diffusion architectures. <br>
     <li>The image builds opencv from source code to have cuda support. <br>
     <li>You can then run the cv algorithms using the GPU for faster processing.<br>
     <li>This will serve you well if you can deploy the container to a remote server.<br>
